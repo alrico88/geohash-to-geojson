@@ -1,0 +1,21 @@
+{
+  "name": "geohash-to-geojson",
+  "version": "1.0.0",
+  "description": "Library to convert geohashes to multiple GeoJSON polygons or a single GeoJSON FeatureCollection",
+  "main": "index.js",
+  "repository": "https://github.com/alrico88/geohash-to-geojson",
+  "author": "Alberto Rico",
+  "license": "MIT",
+  "dependencies": {
+    "@turf/bbox-polygon": "^6.0.1",
+    "@turf/helpers": "^6.1.4",
+    "ngeohash": "^0.6.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.4",
+    "jest": "^25.1.0"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
