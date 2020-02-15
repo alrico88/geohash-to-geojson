@@ -1,6 +1,6 @@
 {
   "name": "geohash-to-geojson",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Library to convert geohashes to multiple GeoJSON polygons or a single GeoJSON FeatureCollection",
   "main": "index.js",
   "repository": "https://github.com/alrico88/geohash-to-geojson",
@@ -16,7 +16,8 @@
     "jest": "^25.1.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "jest"
   },
   "keywords": [
     "geojson",
