@@ -17,5 +17,12 @@
   },
   "scripts": {
     "test": "jest"
-  }
+  },
+  "keywords": [
+    "geojson",
+    "geohash",
+    "featurecollection",
+    "convert",
+    "polygon"
+  ]
 }
