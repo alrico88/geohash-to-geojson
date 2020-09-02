@@ -7,8 +7,14 @@
 <dt><a href="#geohashToPolygonGeometry">geohashToPolygonGeometry(geohash)</a> ⇒ <code><a href="#PolygonGeometry">PolygonGeometry</a></code></dt>
 <dd><p>Converts geohash to polygon Geometry</p>
 </dd>
+<dt><a href="#geohashToPointFeature">geohashToPointFeature(geohash)</a> ⇒ <code><a href="#PointFeature">PointFeature</a></code></dt>
+<dd><p>Converts geohash to point feature, for centroid coordinates</p>
+</dd>
 <dt><a href="#geohashesToFeatureCollection">geohashesToFeatureCollection(hashes)</a> ⇒ <code><a href="#FeatureCollection">FeatureCollection</a></code></dt>
 <dd><p>Converts array of geohashes to GeoJSON FeatureCollection</p>
+</dd>
+<dt><a href="#wrapAsFeatureCollection">wrapAsFeatureCollection(featuresArray)</a> ⇒ <code><a href="#FeatureCollection">FeatureCollection</a></code></dt>
+<dd><p>Helper function to wrap geohash features converted using geohashToPolygonFeature in a FeatureCollection</p>
 </dd>
 </dl>
 
@@ -16,6 +22,8 @@
 
 <dl>
 <dt><a href="#PolygonFeature">PolygonFeature</a></dt>
+<dd></dd>
+<dt><a href="#PointFeature">PointFeature</a></dt>
 <dd></dd>
 <dt><a href="#PolygonGeometry">PolygonGeometry</a></dt>
 <dd></dd>
@@ -48,6 +56,18 @@ Converts geohash to polygon Geometry
 | ------- | ------------------- |
 | geohash | <code>string</code> |
 
+<a name="geohashToPointFeature"></a>
+
+## geohashToPointFeature(geohash) ⇒ [<code>PointFeature</code>](#PointFeature)
+
+Converts geohash to point feature, for centroid coordinates
+
+**Kind**: global function
+
+| Param   | Type                |
+| ------- | ------------------- |
+| geohash | <code>string</code> |
+
 <a name="geohashesToFeatureCollection"></a>
 
 ## geohashesToFeatureCollection(hashes) ⇒ [<code>FeatureCollection</code>](#FeatureCollection)
@@ -60,9 +80,34 @@ Converts array of geohashes to GeoJSON FeatureCollection
 | ------ | --------------------------------- |
 | hashes | <code>Array.&lt;string&gt;</code> |
 
+<a name="wrapAsFeatureCollection"></a>
+
+## wrapAsFeatureCollection(featuresArray) ⇒ [<code>FeatureCollection</code>](#FeatureCollection)
+
+Helper function to wrap geohash features converted using geohashToPolygonFeature in a FeatureCollection
+
+**Kind**: global function
+
+| Param         | Type                                           |
+| ------------- | ---------------------------------------------- |
+| featuresArray | [<code>PolygonFeature</code>](#PolygonFeature) |
+
 <a name="PolygonFeature"></a>
 
 ## PolygonFeature
+
+**Kind**: global typedef  
+**Properties**
+
+| Name       | Type                             |
+| ---------- | -------------------------------- |
+| type       | <code>&#x27;Feature&#x27;</code> |
+| geometry   | <code>Object</code>              |
+| properties | <code>object</code>              |
+
+<a name="PointFeature"></a>
+
+## PointFeature
 
 **Kind**: global typedef  
 **Properties**

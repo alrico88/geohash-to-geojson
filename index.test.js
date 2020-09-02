@@ -2,6 +2,7 @@ const {
   geohashToPolygonFeature,
   geohashToPolygonGeometry,
   geohashesToFeatureCollection,
+  geohashToPointFeature,
 } = require('./index');
 
 test('Same geohash should always return same GeoJSON Feature', () => {
@@ -25,6 +26,19 @@ test('Same geohash should always return same GeoJSON Feature', () => {
           [-3.706512451171875, 40.420074462890625],
         ],
       ],
+    },
+  });
+});
+
+test('Same geohash should always return same GeoJSON Point Feature', () => {
+  expect(geohashToPointFeature('ezjmgwm')).toStrictEqual({
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [-3.7058258056640625, 40.42076110839844],
+    },
+    properties: {
+      geohash: 'ezjmgwm',
     },
   });
 });
