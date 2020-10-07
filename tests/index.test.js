@@ -3,17 +3,11 @@ const {
   geohashToPolygonGeometry,
   geohashesToFeatureCollection,
   geohashToPointFeature,
-} = require('./index');
+} = require('../index');
 
 test('Same geohash should always return same GeoJSON Feature', () => {
-  expect(geohashToPolygonFeature('ezjmgwm')).toStrictEqual({
+  expect(geohashToPolygonFeature('ezjmgwm')).toMatchObject({
     type: 'Feature',
-    bbox: [
-      -3.706512451171875,
-      40.420074462890625,
-      -3.70513916015625,
-      40.42144775390625,
-    ],
     properties: {},
     geometry: {
       type: 'Polygon',
@@ -31,7 +25,7 @@ test('Same geohash should always return same GeoJSON Feature', () => {
 });
 
 test('Same geohash should always return same GeoJSON Point Feature', () => {
-  expect(geohashToPointFeature('ezjmgwm')).toStrictEqual({
+  expect(geohashToPointFeature('ezjmgwm')).toMatchObject({
     type: 'Feature',
     geometry: {
       type: 'Point',
@@ -44,7 +38,7 @@ test('Same geohash should always return same GeoJSON Point Feature', () => {
 });
 
 test('Same geohash should always return same GeoJSON Geometry', () => {
-  expect(geohashToPolygonGeometry('ezjmgwm')).toStrictEqual({
+  expect(geohashToPolygonGeometry('ezjmgwm')).toMatchObject({
     type: 'Polygon',
     coordinates: [
       [
@@ -59,17 +53,11 @@ test('Same geohash should always return same GeoJSON Geometry', () => {
 });
 
 test('Same array of geohashes should always return same GeoJSON FeatureCollection', () => {
-  expect(geohashesToFeatureCollection(['ezjmgwm', 'ezjmgwn'])).toStrictEqual({
+  expect(geohashesToFeatureCollection(['ezjmgwm', 'ezjmgwn'])).toMatchObject({
     type: 'FeatureCollection',
     features: [
       {
         type: 'Feature',
-        bbox: [
-          -3.706512451171875,
-          40.420074462890625,
-          -3.70513916015625,
-          40.42144775390625,
-        ],
         properties: {},
         geometry: {
           type: 'Polygon',
@@ -86,12 +74,6 @@ test('Same array of geohashes should always return same GeoJSON FeatureCollectio
       },
       {
         type: 'Feature',
-        bbox: [
-          -3.70513916015625,
-          40.418701171875,
-          -3.703765869140625,
-          40.420074462890625,
-        ],
         properties: {},
         geometry: {
           type: 'Polygon',

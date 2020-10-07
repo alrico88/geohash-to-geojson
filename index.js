@@ -1,41 +1,25 @@
-const ghash = require('ngeohash');
-const bboxPolygon = require('@turf/bbox-polygon').default;
-const {featureCollection, point} = require('@turf/helpers');
-
-/**
- * @typedef PolygonFeature
- * @property {'Feature'} type
- * @property {{type: 'Polygon', geometry: object}} geometry
- * @property {object} properties
- */
-
-/**
- * @typedef PointFeature
- * @property {'Feature'} type
- * @property {{type: 'Point', geometry: object}} geometry
- * @property {object} properties
- */
+const {decode, decode_bbox} = require('ngeohash');
+const {
+  Point,
+  FeatureCollection,
+  PolygonFeatureFromBBox,
+} = require('./geojson');
 
 /**
  * @typedef PolygonGeometry
- * @property {number[]} coordinates
- */
-
-/**
- * @typedef FeatureCollection
- * @property {'FeatureCollection'} type
- * @property {PolygonFeature[]} features
+ * @property {'Polygon'} type
+ * @property {number[][][]} coordinates
  */
 
 /**
  * Converts geohash to polygon Feature
  * @param {string} geohash
  * @param {object} [properties={}] properties to embed to each feature
- * @returns {PolygonFeature}
+ * @returns {PolygonFeatureFromBBox}
  */
 function geohashToPolygonFeature(geohash, properties = {}) {
-  const [minlat, minlon, maxlat, maxlon] = ghash.decode_bbox(geohash);
-  return bboxPolygon([minlon, minlat, maxlon, maxlat], {
+  const [minlat, minlon, maxlat, maxlon] = decode_bbox(geohash);
+  return new PolygonFeatureFromBBox([minlon, minlat, maxlon, maxlat], {
     properties,
   });
 }
@@ -54,11 +38,11 @@ function geohashToPolygonGeometry(geohash) {
  * Converts geohash to point feature, for centroid coordinates
  *
  * @param {string} geohash
- * @returns {PointFeature}
+ * @returns {Point}
  */
 function geohashToPointFeature(geohash) {
-  const {latitude, longitude} = ghash.decode(geohash);
-  return point([longitude, latitude], {geohash});
+  const {latitude, longitude} = decode(geohash);
+  return new Point(latitude, longitude, {geohash});
 }
 
 /**
@@ -67,7 +51,7 @@ function geohashToPointFeature(geohash) {
  * @returns {FeatureCollection}
  */
 function geohashesToFeatureCollection(hashes) {
-  return featureCollection(hashes.map((hash) => geohashToPolygonFeature(hash)));
+  return new FeatureCollection(hashes.map((hash) => geohashToPolygonFeature(hash)));
 }
 
 /**
@@ -77,7 +61,7 @@ function geohashesToFeatureCollection(hashes) {
  * @returns {FeatureCollection}
  */
 function wrapAsFeatureCollection(featuresArray) {
-  return featureCollection(featuresArray);
+  return new FeatureCollection(featuresArray);
 }
 
 module.exports.geohashToPolygonFeature = geohashToPolygonFeature;
@@ -85,3 +69,6 @@ module.exports.geohashToPointFeature = geohashToPointFeature;
 module.exports.geohashToPolygonGeometry = geohashToPolygonGeometry;
 module.exports.geohashesToFeatureCollection = geohashesToFeatureCollection;
 module.exports.wrapAsFeatureCollection = wrapAsFeatureCollection;
+module.exports.PolygonFeatureFromBBox = PolygonFeatureFromBBox;
+module.exports.Point = Point;
+module.exports.FeatureCollection = FeatureCollection;
