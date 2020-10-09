@@ -6,7 +6,7 @@ const {
 } = require('../index');
 
 test('Same geohash should always return same GeoJSON Feature', () => {
-  expect(geohashToPolygonFeature('ezjmgwm')).toMatchObject({
+  expect(geohashToPolygonFeature('ezjmgwm')).toEqual({
     type: 'Feature',
     properties: {},
     geometry: {
@@ -25,7 +25,7 @@ test('Same geohash should always return same GeoJSON Feature', () => {
 });
 
 test('Same geohash should always return same GeoJSON Point Feature', () => {
-  expect(geohashToPointFeature('ezjmgwm')).toMatchObject({
+  expect(geohashToPointFeature('ezjmgwm')).toEqual({
     type: 'Feature',
     geometry: {
       type: 'Point',
@@ -38,7 +38,7 @@ test('Same geohash should always return same GeoJSON Point Feature', () => {
 });
 
 test('Same geohash should always return same GeoJSON Geometry', () => {
-  expect(geohashToPolygonGeometry('ezjmgwm')).toMatchObject({
+  expect(geohashToPolygonGeometry('ezjmgwm')).toEqual({
     type: 'Polygon',
     coordinates: [
       [
@@ -53,7 +53,7 @@ test('Same geohash should always return same GeoJSON Geometry', () => {
 });
 
 test('Same array of geohashes should always return same GeoJSON FeatureCollection', () => {
-  expect(geohashesToFeatureCollection(['ezjmgwm', 'ezjmgwn'])).toMatchObject({
+  expect(geohashesToFeatureCollection(['ezjmgwm', 'ezjmgwn'])).toEqual({
     type: 'FeatureCollection',
     features: [
       {

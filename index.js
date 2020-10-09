@@ -19,9 +19,10 @@ const {
  */
 function geohashToPolygonFeature(geohash, properties = {}) {
   const [minlat, minlon, maxlat, maxlon] = decode_bbox(geohash);
-  return new PolygonFeatureFromBBox([minlon, minlat, maxlon, maxlat], {
-    properties,
-  });
+  return new PolygonFeatureFromBBox(
+    [minlon, minlat, maxlon, maxlat],
+    properties
+  );
 }
 
 /**
