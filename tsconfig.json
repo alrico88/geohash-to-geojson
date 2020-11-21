@@ -1,0 +1,12 @@
+{
+  "include": [
+      "index.js"
+  ],
+  "exclude": ["./tests/*"],
+  "compilerOptions": {
+      "declaration": true,
+      "emitDeclarationOnly": true,
+      "allowJs": true,
+      "lib": ["ES2015"]
+  }
+}
