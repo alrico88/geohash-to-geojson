@@ -1,99 +1,140 @@
+# geohash-to-geojson
+
+## Installation
+
+### Using npm
+
+`npm i geohash-to-geojson`
+
+### Using Yarn
+
+`yarn add geohash-to-geojson`
+
+Then import the desired functions in your code
+
+```javascript
+import {geohashToPolygonFeature} from 'geohash-to-geojson';
+
+geohashToPolygonFeature('ezjmgz');
+
+...
+```
+
+## Table of contents
+
+### Functions
+
+- [geohashToPointFeature](#geohashtopointfeature)
+- [geohashToPolygonFeature](#geohashtopolygonfeature)
+- [geohashToPolygonGeometry](#geohashtopolygongeometry)
+- [geohashesToFeatureCollection](#geohashestofeaturecollection)
+- [wrapAsFeatureCollection](#wrapasfeaturecollection)
+
 ## Functions
 
-<dl>
-<dt><a href="#geohashToPolygonFeature">geohashToPolygonFeature(geohash, [properties])</a> ⇒ <code>PolygonFeatureFromBBox</code></dt>
-<dd><p>Converts geohash to polygon Feature</p>
-</dd>
-<dt><a href="#geohashToPolygonGeometry">geohashToPolygonGeometry(geohash)</a> ⇒ <code><a href="#PolygonGeometry">PolygonGeometry</a></code></dt>
-<dd><p>Converts geohash to polygon Geometry</p>
-</dd>
-<dt><a href="#geohashToPointFeature">geohashToPointFeature(geohash)</a> ⇒ <code>Point</code></dt>
-<dd><p>Converts geohash to point feature, for centroid coordinates</p>
-</dd>
-<dt><a href="#geohashesToFeatureCollection">geohashesToFeatureCollection(hashes)</a> ⇒ <code>FeatureCollection</code></dt>
-<dd><p>Converts array of geohashes to GeoJSON FeatureCollection</p>
-</dd>
-<dt><a href="#wrapAsFeatureCollection">wrapAsFeatureCollection(featuresArray)</a> ⇒ <code>FeatureCollection</code></dt>
-<dd><p>Helper function to wrap geohash features converted using geohashToPolygonFeature in a FeatureCollection</p>
-</dd>
-</dl>
+### geohashToPointFeature
 
-## Typedefs
-
-<dl>
-<dt><a href="#PolygonGeometry">PolygonGeometry</a></dt>
-<dd></dd>
-</dl>
-
-<a name="geohashToPolygonFeature"></a>
-
-## geohashToPolygonFeature(geohash, [properties]) ⇒ <code>PolygonFeatureFromBBox</code>
-
-Converts geohash to polygon Feature
-
-**Kind**: global function
-
-| Param        | Type                | Default         | Description                         |
-| ------------ | ------------------- | --------------- | ----------------------------------- |
-| geohash      | <code>string</code> |                 |                                     |
-| [properties] | <code>object</code> | <code>{}</code> | properties to embed to each feature |
-
-<a name="geohashToPolygonGeometry"></a>
-
-## geohashToPolygonGeometry(geohash) ⇒ [<code>PolygonGeometry</code>](#PolygonGeometry)
-
-Converts geohash to polygon Geometry
-
-**Kind**: global function
-
-| Param   | Type                |
-| ------- | ------------------- |
-| geohash | <code>string</code> |
-
-<a name="geohashToPointFeature"></a>
-
-## geohashToPointFeature(geohash) ⇒ <code>Point</code>
+▸ **geohashToPointFeature**(`geohash`: _string_): _Feature_<Point\>
 
 Converts geohash to point feature, for centroid coordinates
 
-**Kind**: global function
+**`export`**
 
-| Param   | Type                |
-| ------- | ------------------- |
-| geohash | <code>string</code> |
+#### Parameters:
 
-<a name="geohashesToFeatureCollection"></a>
+| Name      | Type     | Description                         |
+| :-------- | :------- | :---------------------------------- |
+| `geohash` | _string_ | Geohash to convert to Point Feature |
 
-## geohashesToFeatureCollection(hashes) ⇒ <code>FeatureCollection</code>
+**Returns:** _Feature_<Point\>
+
+The geohash centroid as a Point Feature
+
+Defined in: index.ts:41
+
+---
+
+### geohashToPolygonFeature
+
+▸ **geohashToPolygonFeature**(`geohash`: _string_, `properties?`: GeoJsonProperties): _Feature_<Polygon\>
+
+Converts geohash to polygon Feature
+
+**`export`**
+
+#### Parameters:
+
+| Name         | Type              | Description                           |
+| :----------- | :---------------- | :------------------------------------ |
+| `geohash`    | _string_          | Geohash to convert to Polygon Feature |
+| `properties` | GeoJsonProperties | -                                     |
+
+**Returns:** _Feature_<Polygon\>
+
+Defined in: index.ts:13
+
+---
+
+### geohashToPolygonGeometry
+
+▸ **geohashToPolygonGeometry**(`geohash`: _string_): Polygon
+
+Converts geohash to polygon Geometry
+
+**`export`**
+
+#### Parameters:
+
+| Name      | Type     | Description                        |
+| :-------- | :------- | :--------------------------------- |
+| `geohash` | _string_ | Geohash to get as Polygon Geometry |
+
+**Returns:** Polygon
+
+The Polygon Geometry representing the geohash
+
+Defined in: index.ts:30
+
+---
+
+### geohashesToFeatureCollection
+
+▸ **geohashesToFeatureCollection**(`hashes`: _string_[]): FeatureCollection
 
 Converts array of geohashes to GeoJSON FeatureCollection
 
-**Kind**: global function
+**`export`**
 
-| Param  | Type                              |
-| ------ | --------------------------------- |
-| hashes | <code>Array.&lt;string&gt;</code> |
+#### Parameters:
 
-<a name="wrapAsFeatureCollection"></a>
+| Name     | Type       | Description                              |
+| :------- | :--------- | :--------------------------------------- |
+| `hashes` | _string_[] | Geohashes to wrap into FeatureCollection |
 
-## wrapAsFeatureCollection(featuresArray) ⇒ <code>FeatureCollection</code>
+**Returns:** FeatureCollection
+
+FeatureCollection with each geohash as a Polygon Feature inside
+
+Defined in: index.ts:65
+
+---
+
+### wrapAsFeatureCollection
+
+▸ **wrapAsFeatureCollection**(`featuresArray`: Feature[]): FeatureCollection
 
 Helper function to wrap geohash features converted using geohashToPolygonFeature in a FeatureCollection
 
-**Kind**: global function
+**`export`**
 
-| Param         | Type                        |
-| ------------- | --------------------------- |
-| featuresArray | <code>PolygonFeature</code> |
+#### Parameters:
 
-<a name="PolygonGeometry"></a>
+| Name            | Type      | Description                                         |
+| :-------------- | :-------- | :-------------------------------------------------- |
+| `featuresArray` | Feature[] | Features array to wrap inside the FeatureCollection |
 
-## PolygonGeometry
+**Returns:** FeatureCollection
 
-**Kind**: global typedef  
-**Properties**
+FeatureCollection wrapping the Features
 
-| Name        | Type                                                          |
-| ----------- | ------------------------------------------------------------- |
-| type        | <code>&#x27;Polygon&#x27;</code>                              |
-| coordinates | <code>Array.&lt;Array.&lt;Array.&lt;number&gt;&gt;&gt;</code> |
+Defined in: index.ts:54
