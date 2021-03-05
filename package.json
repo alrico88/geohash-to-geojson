@@ -13,6 +13,8 @@
   "author": "Alberto Rico",
   "license": "MIT",
   "dependencies": {
+    "@turf/circle": "^6.3.0",
+    "@turf/distance": "^6.3.0",
     "@turf/helpers": "^6.3.0",
     "ngeohash": "^0.6.3"
   },
@@ -21,6 +23,7 @@
   },
   "devDependencies": {
     "@size-limit/preset-small-lib": "^4.9.2",
+    "@turf/bbox": "^6.3.0",
     "@types/geojson": "^7946.0.7",
     "@types/ngeohash": "^0.6.2",
     "@typescript-eslint/eslint-plugin": "^4.15.2",

@@ -1,6 +1,7 @@
-import {Feature, point, Polygon, polygon, Point, FeatureCollection, featureCollection} from '@turf/helpers';
+import {point, polygon, featureCollection, Feature, Polygon, Point, FeatureCollection} from '@turf/helpers';
 import {GeoJsonProperties} from 'geojson';
 import {getGeohashAsBBox, getGeohashAsLatLon} from './helpers/geohash';
+import {createCircleFromGeohash, getDistance} from './helpers/utils';
 
 /**
  * Converts geohash to polygon Feature
@@ -42,6 +43,42 @@ export function geohashToPointFeature(geohash: string): Feature<Point> {
     const {latitude, longitude} = getGeohashAsLatLon(geohash);
 
     return point([longitude, latitude], {geohash});
+}
+
+/**
+ * Converts geohash to a circle Feature, based on % of the size desired
+ *
+ * @export
+ * @param  {string} geohash Geohash to convert to circle
+ * @param  {number} percentage Percentage of the geohash area to cover with the circle
+ * @param  {GeoJsonProperties} [properties={}] Properties to embed to the resulting feature
+ * @return {Feature<Polygon>} The geohash as a circle Polygon Feature
+ */
+export function geohashToCircleFeature(geohash: string, percentage: number, properties: GeoJsonProperties = {}): Feature<Polygon> {
+    const [minLon, minLat, maxLon, maxLat] = getGeohashAsBBox(geohash);
+    const sw = [minLon, minLat];
+    const se = [maxLon, minLat];
+    const nw = [minLon, maxLat];
+
+    const minDistance = Math.min(getDistance(sw, se), getDistance(sw, nw));
+    const half = 2;
+    const radiusDistance = minDistance / half;
+    const total = 100;
+    const radiusCalc = radiusDistance * (percentage / total);
+
+    return createCircleFromGeohash(geohash, radiusCalc, properties);
+}
+
+/**
+ * Converts geohash to a circle Polygon Geometry, based on % of the size desired
+ *
+ * @export
+ * @param  {string} geohash Geohash to convert to circle
+ * @param  {number} percentage Percentage of the geohash area to cover with the circle
+ * @return {Feature<Polygon>} The geohash as a circle Polygon Geometry
+ */
+export function geohashToCircleGeometry(geohash: string, percentage: number): Polygon {
+    return geohashToCircleFeature(geohash, percentage).geometry;
 }
 
 /**
