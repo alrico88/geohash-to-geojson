@@ -17,6 +17,7 @@
     "cheap-ruler": "^3.0.1",
     "ngeohash": "^0.6.3"
   },
+  "sideEffects": false,
   "engines": {
     "node": ">=10"
   },
@@ -37,24 +38,12 @@
     "typedoc-plugin-markdown": "^3.5.0",
     "typescript": "^4.2.2"
   },
-  "size-limit": [
-    {
-      "path": "dist/geohash-to-geojson.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/geohash-to-geojson.esm.js",
-      "limit": "10 KB"
-    }
-  ],
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
     "test": "tsdx test",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
-    "size": "size-limit",
-    "analyze": "size-limit --why",
     "docs": "typedoc src/index.ts --readme",
     "coveralls": "tsdx test --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
