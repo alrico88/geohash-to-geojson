@@ -1,7 +1,8 @@
-import {point, polygon, featureCollection, Feature, Polygon, Point, FeatureCollection} from '@turf/helpers';
-import {GeoJsonProperties} from 'geojson';
+import CheapRuler from 'cheap-ruler';
+import {Feature, FeatureCollection, GeoJsonProperties, Point, Polygon} from 'geojson';
 import {getGeohashAsBBox, getGeohashAsLatLon} from './helpers/geohash';
-import {createCircleFromGeohash, getDistance} from './helpers/utils';
+import {polygon, featureCollection, point} from './helpers/geojson';
+import {createCheapRuler, createCircleFromGeohash, getDistance} from './helpers/utils';
 
 /**
  * Converts geohash to polygon Feature
@@ -18,6 +19,7 @@ export function geohashToPolygonFeature(geohash: string, properties: GeoJsonProp
     const nw = [minLon, maxLat];
     const ne = [maxLon, maxLat];
     const coordinates = [[sw, se, ne, nw, sw]];
+
     return polygon(coordinates, properties);
 }
 
@@ -45,6 +47,11 @@ export function geohashToPointFeature(geohash: string): Feature<Point> {
     return point([longitude, latitude], {geohash});
 }
 
+export type CircleOptions = {
+    ruler?: CheapRuler;
+    steps?: number;
+};
+
 /**
  * Converts geohash to a circle Feature, based on % of the size desired
  *
@@ -52,21 +59,30 @@ export function geohashToPointFeature(geohash: string): Feature<Point> {
  * @param  {string} geohash Geohash to convert to circle
  * @param  {number} percentage Percentage of the geohash area to cover with the circle
  * @param  {GeoJsonProperties} [properties={}] Properties to embed to the resulting feature
+ * @param  {CircleOptions} [options] Options for circle rendering
+ * @param  {CheapRuler} [options.ruler] A CheapRuler instance to make computing distances faster
+ * @param  {number} [options.steps=32] Number of steps for converting circle to polygon
  * @return {Feature<Polygon>} The geohash as a circle Polygon Feature
  */
-export function geohashToCircleFeature(geohash: string, percentage: number, properties: GeoJsonProperties = {}): Feature<Polygon> {
+export function geohashToCircleFeature(geohash: string, percentage: number, properties: GeoJsonProperties = {}, options?: CircleOptions): Feature<Polygon> {
     const [minLon, minLat, maxLon, maxLat] = getGeohashAsBBox(geohash);
     const sw = [minLon, minLat];
     const se = [maxLon, minLat];
     const nw = [minLon, maxLat];
 
-    const minDistance = Math.min(getDistance(sw, se), getDistance(sw, nw));
+    let rulerToUse = options?.ruler;
+
+    if (!rulerToUse) {
+        rulerToUse = createCheapRuler(minLat);
+    }
+
+    const minDistance = Math.min(getDistance(sw, se, rulerToUse), getDistance(sw, nw, rulerToUse));
     const half = 2;
     const radiusDistance = minDistance / half;
     const total = 100;
     const radiusCalc = radiusDistance * (percentage / total);
 
-    return createCircleFromGeohash(geohash, radiusCalc, properties);
+    return createCircleFromGeohash(geohash, radiusCalc, properties, options?.steps);
 }
 
 /**
@@ -75,10 +91,13 @@ export function geohashToCircleFeature(geohash: string, percentage: number, prop
  * @export
  * @param  {string} geohash Geohash to convert to circle
  * @param  {number} percentage Percentage of the geohash area to cover with the circle
+ * @param  {CircleOptions} [options] Options for circle rendering
+ * @param  {CheapRuler} [options.ruler] A CheapRuler instance to make computing distances faster
+ * @param  {number} [options.steps=32] Number of steps for converting circle to polygon
  * @return {Feature<Polygon>} The geohash as a circle Polygon Geometry
  */
-export function geohashToCircleGeometry(geohash: string, percentage: number): Polygon {
-    return geohashToCircleFeature(geohash, percentage).geometry;
+export function geohashToCircleGeometry(geohash: string, percentage: number, options?: CircleOptions): Polygon {
+    return geohashToCircleFeature(geohash, percentage, options).geometry;
 }
 
 /**

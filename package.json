@@ -14,15 +14,13 @@
   "license": "MIT",
   "dependencies": {
     "@turf/circle": "^6.3.0",
-    "@turf/distance": "^6.3.0",
-    "@turf/helpers": "^6.3.0",
+    "cheap-ruler": "^3.0.1",
     "ngeohash": "^0.6.3"
   },
   "engines": {
     "node": ">=10"
   },
   "devDependencies": {
-    "@size-limit/preset-small-lib": "^4.9.2",
     "@turf/bbox": "^6.3.0",
     "@types/geojson": "^7946.0.7",
     "@types/ngeohash": "^0.6.2",
@@ -33,7 +31,6 @@
     "eslint": "^7.20.0",
     "eslint-config-prettier": "^8.1.0",
     "husky": "^5.1.1",
-    "size-limit": "^4.9.2",
     "tsdx": "^0.14.1",
     "tslib": "^2.1.0",
     "typedoc": "^0.20.28",
