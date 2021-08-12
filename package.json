@@ -1,6 +1,6 @@
 {
   "name": "geohash-to-geojson",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "main": "dist/index.js",
   "module": "dist/geohash-to-geojson.esm.js",
   "typings": "dist/index.d.ts",
