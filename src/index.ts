@@ -39,12 +39,16 @@ export function geohashToPolygonGeometry(geohash: string): Polygon {
  *
  * @export
  * @param {string} geohash Geohash to convert to Point Feature
+ * @param {GeoJsonProperties} [properties={}] Properties to embed to the resulting feature
  * @returns {Point} The geohash centroid as a Point Feature
  */
-export function geohashToPointFeature(geohash: string): Feature<Point> {
+export function geohashToPointFeature(geohash: string, properties: GeoJsonProperties = {}): Feature<Point> {
     const {latitude, longitude} = getGeohashAsLatLon(geohash);
 
-    return point([longitude, latitude], {geohash});
+    return point([longitude, latitude], {
+        geohash,
+        ...properties,
+    });
 }
 
 export type CircleOptions = {
