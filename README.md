@@ -20,8 +20,6 @@ geohashToPolygonFeature('ezjmgz');
 ...
 ```
 
-[geohash-to-geojson](README.md) / Exports
-
 # geohash-to-geojson
 
 ## Table of contents
@@ -44,141 +42,202 @@ geohashToPolygonFeature('ezjmgz');
 
 ### CircleOptions
 
-Ƭ **CircleOptions**: _object_
+Ƭ **CircleOptions**: `Object`
 
-#### Type declaration:
+#### Type declaration
 
-| Name     | Type       |
-| :------- | :--------- |
-| `ruler`? | CheapRuler |
-| `steps`? | _number_   |
+| Name     | Type         |
+| :------- | :----------- |
+| `ruler?` | `CheapRuler` |
+| `steps?` | `number`     |
+
+#### Defined in
+
+[index.ts:54](https://github.com/alrico88/geohash-to-geojson/blob/master/src/index.ts#L54)
 
 ## Functions
 
 ### geohashToCircleFeature
 
-▸ **geohashToCircleFeature**(`geohash`: _string_, `percentage`: _number_, `properties?`: GeoJsonProperties, `options?`: [_CircleOptions_](#circleoptions)): _Feature_<Polygon\>
+▸ **geohashToCircleFeature**(`geohash`, `percentage`, `properties?`, `options?`): `Feature`<`Polygon`\>
 
 Converts geohash to a circle Feature, based on % of the size desired
 
-#### Parameters:
+**`export`**
+
+#### Parameters
 
 | Name         | Type                              | Description                                             |
 | :----------- | :-------------------------------- | :------------------------------------------------------ |
-| `geohash`    | _string_                          | Geohash to convert to circle                            |
-| `percentage` | _number_                          | Percentage of the geohash area to cover with the circle |
-| `properties` | GeoJsonProperties                 | -                                                       |
-| `options?`   | [_CircleOptions_](#circleoptions) | -                                                       |
+| `geohash`    | `string`                          | Geohash to convert to circle                            |
+| `percentage` | `number`                          | Percentage of the geohash area to cover with the circle |
+| `properties` | `GeoJsonProperties`               | -                                                       |
+| `options?`   | [`CircleOptions`](#circleoptions) | -                                                       |
 
-**Returns:** _Feature_<Polygon\>
+#### Returns
+
+`Feature`<`Polygon`\>
 
 The geohash as a circle Polygon Feature
+
+#### Defined in
+
+[index.ts:71](https://github.com/alrico88/geohash-to-geojson/blob/master/src/index.ts#L71)
 
 ---
 
 ### geohashToCircleGeometry
 
-▸ **geohashToCircleGeometry**(`geohash`: _string_, `percentage`: _number_, `options?`: [_CircleOptions_](#circleoptions)): Polygon
+▸ **geohashToCircleGeometry**(`geohash`, `percentage`, `options?`): `Polygon`
 
 Converts geohash to a circle Polygon Geometry, based on % of the size desired
 
-#### Parameters:
+**`export`**
+
+#### Parameters
 
 | Name         | Type                              | Description                                             |
 | :----------- | :-------------------------------- | :------------------------------------------------------ |
-| `geohash`    | _string_                          | Geohash to convert to circle                            |
-| `percentage` | _number_                          | Percentage of the geohash area to cover with the circle |
-| `options?`   | [_CircleOptions_](#circleoptions) | -                                                       |
+| `geohash`    | `string`                          | Geohash to convert to circle                            |
+| `percentage` | `number`                          | Percentage of the geohash area to cover with the circle |
+| `options?`   | [`CircleOptions`](#circleoptions) | -                                                       |
 
-**Returns:** Polygon
+#### Returns
+
+`Polygon`
 
 The geohash as a circle Polygon Geometry
+
+#### Defined in
+
+[index.ts:103](https://github.com/alrico88/geohash-to-geojson/blob/master/src/index.ts#L103)
 
 ---
 
 ### geohashToPointFeature
 
-▸ **geohashToPointFeature**(`geohash`: _string_): _Feature_<Point\>
+▸ **geohashToPointFeature**(`geohash`, `properties?`): `Feature`<`Point`\>
 
 Converts geohash to point feature, for centroid coordinates
 
-#### Parameters:
+**`export`**
 
-| Name      | Type     | Description                         |
-| :-------- | :------- | :---------------------------------- |
-| `geohash` | _string_ | Geohash to convert to Point Feature |
+#### Parameters
 
-**Returns:** _Feature_<Point\>
+| Name         | Type                | Description                         |
+| :----------- | :------------------ | :---------------------------------- |
+| `geohash`    | `string`            | Geohash to convert to Point Feature |
+| `properties` | `GeoJsonProperties` | -                                   |
+
+#### Returns
+
+`Feature`<`Point`\>
 
 The geohash centroid as a Point Feature
+
+#### Defined in
+
+[index.ts:45](https://github.com/alrico88/geohash-to-geojson/blob/master/src/index.ts#L45)
 
 ---
 
 ### geohashToPolygonFeature
 
-▸ **geohashToPolygonFeature**(`geohash`: _string_, `properties?`: GeoJsonProperties): _Feature_<Polygon\>
+▸ **geohashToPolygonFeature**(`geohash`, `properties?`): `Feature`<`Polygon`\>
 
 Converts geohash to polygon Feature
 
-#### Parameters:
+**`export`**
 
-| Name         | Type              | Description                           |
-| :----------- | :---------------- | :------------------------------------ |
-| `geohash`    | _string_          | Geohash to convert to Polygon Feature |
-| `properties` | GeoJsonProperties | -                                     |
+#### Parameters
 
-**Returns:** _Feature_<Polygon\>
+| Name         | Type                | Description                           |
+| :----------- | :------------------ | :------------------------------------ |
+| `geohash`    | `string`            | Geohash to convert to Polygon Feature |
+| `properties` | `GeoJsonProperties` | -                                     |
+
+#### Returns
+
+`Feature`<`Polygon`\>
+
+#### Defined in
+
+[index.ts:15](https://github.com/alrico88/geohash-to-geojson/blob/master/src/index.ts#L15)
 
 ---
 
 ### geohashToPolygonGeometry
 
-▸ **geohashToPolygonGeometry**(`geohash`: _string_): Polygon
+▸ **geohashToPolygonGeometry**(`geohash`): `Polygon`
 
 Converts geohash to polygon Geometry
 
-#### Parameters:
+**`export`**
+
+#### Parameters
 
 | Name      | Type     | Description                        |
 | :-------- | :------- | :--------------------------------- |
-| `geohash` | _string_ | Geohash to get as Polygon Geometry |
+| `geohash` | `string` | Geohash to get as Polygon Geometry |
 
-**Returns:** Polygon
+#### Returns
+
+`Polygon`
 
 The Polygon Geometry representing the geohash
+
+#### Defined in
+
+[index.ts:33](https://github.com/alrico88/geohash-to-geojson/blob/master/src/index.ts#L33)
 
 ---
 
 ### geohashesToFeatureCollection
 
-▸ **geohashesToFeatureCollection**(`hashes`: _string_[]): FeatureCollection
+▸ **geohashesToFeatureCollection**(`hashes`): `FeatureCollection`
 
 Converts array of geohashes to GeoJSON FeatureCollection
 
-#### Parameters:
+**`export`**
+
+#### Parameters
 
 | Name     | Type       | Description                              |
 | :------- | :--------- | :--------------------------------------- |
-| `hashes` | _string_[] | Geohashes to wrap into FeatureCollection |
+| `hashes` | `string`[] | Geohashes to wrap into FeatureCollection |
 
-**Returns:** FeatureCollection
+#### Returns
+
+`FeatureCollection`
 
 FeatureCollection with each geohash as a Polygon Feature inside
+
+#### Defined in
+
+[index.ts:125](https://github.com/alrico88/geohash-to-geojson/blob/master/src/index.ts#L125)
 
 ---
 
 ### wrapAsFeatureCollection
 
-▸ **wrapAsFeatureCollection**(`featuresArray`: Feature[]): FeatureCollection
+▸ **wrapAsFeatureCollection**(`featuresArray`): `FeatureCollection`
 
 Helper function to wrap geohash features converted using geohashToPolygonFeature in a FeatureCollection
 
-#### Parameters:
+**`export`**
 
-| Name            | Type      | Description                                         |
-| :-------------- | :-------- | :-------------------------------------------------- |
-| `featuresArray` | Feature[] | Features array to wrap inside the FeatureCollection |
+#### Parameters
 
-**Returns:** FeatureCollection
+| Name            | Type                                          | Description                                         |
+| :-------------- | :-------------------------------------------- | :-------------------------------------------------- |
+| `featuresArray` | `Feature`<`Geometry`, `GeoJsonProperties`\>[] | Features array to wrap inside the FeatureCollection |
+
+#### Returns
+
+`FeatureCollection`
 
 FeatureCollection wrapping the Features
+
+#### Defined in
+
+[index.ts:114](https://github.com/alrico88/geohash-to-geojson/blob/master/src/index.ts#L114)
