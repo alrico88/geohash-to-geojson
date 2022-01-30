@@ -8,6 +8,7 @@ import {
 } from '../src';
 import {getGeohashAsBBox} from '../src/helpers/geohash';
 import bbox from '@turf/bbox';
+import {describe, it, expect} from 'vitest';
 
 describe('Geohash to polygon shapes methods', () => {
   it('Same geohash should always return same GeoJSON Feature', () => {

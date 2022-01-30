@@ -4,6 +4,7 @@ import CheapRuler, {Point} from 'cheap-ruler';
 import {polygon} from './geojson';
 
 const defaultCircleSteps = 32;
+const startBearing = -360;
 
 export function createCheapRuler(latitude: number): CheapRuler {
     return new CheapRuler(latitude, 'meters');
@@ -39,7 +40,7 @@ export function createCircleFromGeohash(geohash: string, radius: number, propert
     const coords: Position[] = [];
 
     for (let i = 0; i < steps; i++) {
-        const bearing = i * -360 / steps;
+        const bearing = i * startBearing / steps;
         coords.push(ruler.destination([longitude, latitude], radius, bearing));
     }
 
