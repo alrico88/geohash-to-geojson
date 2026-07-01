@@ -1,13 +1,13 @@
 {
   "name": "geohash-to-geojson",
   "version": "4.2.1",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     }
   },
@@ -23,6 +23,7 @@
     "cheap-ruler": "^4.1.0",
     "ngeohash": "^0.6.3"
   },
+  "type": "module",
   "sideEffects": false,
   "engines": {
     "node": ">=18"
