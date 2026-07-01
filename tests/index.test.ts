@@ -1,14 +1,15 @@
-/* eslint-disable @typescript-eslint/no-magic-numbers */
-
+import bbox from '@turf/bbox';
+import { describe, expect, it } from 'vitest';
+import CheapRuler from 'cheap-ruler';
 import {
+  geohashesToFeatureCollection,
+  geohashToCircleFeature,
+  geohashToCircleGeometry,
+  geohashToPointFeature,
   geohashToPolygonFeature,
   geohashToPolygonGeometry,
-  geohashesToFeatureCollection,
-  geohashToPointFeature, geohashToCircleFeature,
 } from '../src';
-import {getGeohashAsBBox} from '../src/helpers/geohash';
-import bbox from '@turf/bbox';
-import {describe, it, expect} from 'vitest';
+import { getGeohashAsBBox } from '../src/helpers/geohash';
 
 describe('Geohash to polygon shapes methods', () => {
   it('Same geohash should always return same GeoJSON Feature', () => {
@@ -106,13 +107,28 @@ describe('Geohash to circle shape methods', () => {
 
   it('Asking for a circle inside of a geohash, with a percentage less than 100, should not exceed the BBox of the geohash', () => {
     const geohashAsCircle = geohashToCircleFeature(testHash, 80);
-    const [minCircleLon, minCircleLat, maxCircleLon, maxCircleLat] = bbox(geohashAsCircle);
+    const [minCircleLon, minCircleLat, maxCircleLon, maxCircleLat] =
+      bbox(geohashAsCircle);
     const conditions = [
-        minCircleLon > minHashLon,
-        minCircleLat > minHashLat,
-        maxCircleLon < maxHashLon,
-        maxCircleLat < maxHashLat,
+      minCircleLon > minHashLon,
+      minCircleLat > minHashLat,
+      maxCircleLon < maxHashLon,
+      maxCircleLat < maxHashLat,
     ];
     expect(conditions.includes(false)).toBe(false);
+  });
+
+  it('geohashToCircleGeometry should return a valid Polygon Geometry', () => {
+    const geometry = geohashToCircleGeometry(testHash, 80);
+    expect(geometry.type).toBe('Polygon');
+    expect(geometry.coordinates[0].length).toBeGreaterThan(3);
+  });
+
+  it('geohashToCircleFeature should accept custom ruler and steps options', () => {
+    const ruler = new CheapRuler(40.42, 'meters');
+    const circle = geohashToCircleFeature(testHash, 50, {}, { ruler, steps: 64 });
+    expect(circle.type).toBe('Feature');
+    expect(circle.geometry.type).toBe('Polygon');
+    expect(circle.geometry.coordinates[0].length).toBe(65);
   });
 });
